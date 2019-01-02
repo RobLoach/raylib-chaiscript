@@ -7,7 +7,7 @@
 #include <raylib.h>
 
 /**
- * Load the Box2D library.
+ * Load the Raylib library.
  */
 #include "../include/chaiscript/extras/raylib.hpp"
 
