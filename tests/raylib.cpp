@@ -31,10 +31,15 @@ TEST_CASE( "raylib functions work", "[raylib]" ) {
   )"");
   CHECK(chai.eval<int>("screenWidth") == 800);
 
-  // Color
+  // Colors
   chai.eval(R""(
-    var col = LIGHTGRAY;
-    var gr = PINK;
+    var hotPink = PINK;
   )"");
-  CHECK(chai.eval<unsigned char>("gr.g") == 109);
+  CHECK(chai.eval<unsigned char>("hotPink.g") == 109);
+
+  // Enums
+  chai.eval(R""(
+    var period = KEY_PERIOD;
+  )"");
+  CHECK(chai.eval<int>("period") == KEY_PERIOD);
 }

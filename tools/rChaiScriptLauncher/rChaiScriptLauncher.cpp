@@ -5,7 +5,7 @@
 *   DEPENDENCIES:
 *
 *   raylib 2.0 - This program uses latest raylib version (www.raylib.com)
-*   ChaiScript 5.x  - http://chaiscript.com
+*   ChaiScript >= 5.x  - http://chaiscript.com
 *
 *   COMPILATION (GCC):
 *
