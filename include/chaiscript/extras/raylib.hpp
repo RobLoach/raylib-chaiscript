@@ -61,6 +61,34 @@ namespace chaiscript {
       }
 
       /**
+       * Drawing-related functions
+       */
+      ModulePtr addDrawing(ModulePtr m = std::make_shared<Module>()) {
+        m->add(fun(&ClearBackground), "ClearBackground");
+        m->add(fun(&BeginDrawing), "BeginDrawing");
+        m->add(fun(&EndDrawing), "EndDrawing");
+        m->add(fun(&BeginMode2D), "BeginMode2D");
+        m->add(fun(&EndMode2D), "EndMode2D");
+        m->add(fun(&BeginMode3D), "BeginMode3D");
+        m->add(fun(&EndMode3D), "EndMode3D");
+        m->add(fun(&BeginTextureMode), "BeginTextureMode");
+        m->add(fun(&EndTextureMode), "EndTextureMode");
+
+        return m;
+      }
+
+      /**
+       * Screen-space-related functions
+       */
+      ModulePtr addScreenSpace(ModulePtr m = std::make_shared<Module>()) {
+        m->add(fun(&GetMouseRay), "GetMouseRay");
+        m->add(fun(&GetWorldToScreen), "GetWorldToScreen");
+        m->add(fun(&GetCameraMatrix), "GetCameraMatrix");
+
+        return m;
+      }
+
+      /**
        * Time-related functions
        */
       ModulePtr addTime(ModulePtr m = std::make_shared<Module>()) {
@@ -72,7 +100,7 @@ namespace chaiscript {
         return m;
       }
 
-      void addColor(ModulePtr m, Color color, const std::string& name) {
+      void addColorConst(ModulePtr m, Color color, const std::string& name) {
         const Color constcolor = color;
         m->add_global_const(const_var(constcolor), name);
       }
@@ -111,32 +139,32 @@ namespace chaiscript {
         m->add(fun(&Color::a), "a");
 
         // Color Constants
-        addColor(m, LIGHTGRAY, "LIGHTGRAY");
-        addColor(m, GRAY, "GRAY");
-        addColor(m, DARKGRAY, "DARKGRAY");
-        addColor(m, YELLOW, "YELLOW");
-        addColor(m, GOLD, "GOLD");
-        addColor(m, ORANGE, "ORANGE");
-        addColor(m, PINK, "PINK");
-        addColor(m, RED, "RED");
-        addColor(m, MAROON, "MAROON");
-        addColor(m, GREEN, "GREEN");
-        addColor(m, LIME, "LIME");
-        addColor(m, DARKGREEN, "DARKGREEN");
-        addColor(m, SKYBLUE, "SKYBLUE");
-        addColor(m, BLUE, "BLUE");
-        addColor(m, DARKBLUE, "DARKBLUE");
-        addColor(m, PURPLE, "PURPLE");
-        addColor(m, VIOLET, "VIOLET");
-        addColor(m, DARKPURPLE, "DARKPURPLE");
-        addColor(m, BEIGE, "BEIGE");
-        addColor(m, BROWN, "BROWN");
-        addColor(m, DARKBROWN, "DARKBROWN");
-        addColor(m, WHITE, "WHITE");
-        addColor(m, BLACK, "BLACK");
-        addColor(m, BLANK, "BLANK");
-        addColor(m, MAGENTA, "MAGENTA");
-        addColor(m, RAYWHITE, "RAYWHITE");
+        addColorConst(m, LIGHTGRAY, "LIGHTGRAY");
+        addColorConst(m, GRAY, "GRAY");
+        addColorConst(m, DARKGRAY, "DARKGRAY");
+        addColorConst(m, YELLOW, "YELLOW");
+        addColorConst(m, GOLD, "GOLD");
+        addColorConst(m, ORANGE, "ORANGE");
+        addColorConst(m, PINK, "PINK");
+        addColorConst(m, RED, "RED");
+        addColorConst(m, MAROON, "MAROON");
+        addColorConst(m, GREEN, "GREEN");
+        addColorConst(m, LIME, "LIME");
+        addColorConst(m, DARKGREEN, "DARKGREEN");
+        addColorConst(m, SKYBLUE, "SKYBLUE");
+        addColorConst(m, BLUE, "BLUE");
+        addColorConst(m, DARKBLUE, "DARKBLUE");
+        addColorConst(m, PURPLE, "PURPLE");
+        addColorConst(m, VIOLET, "VIOLET");
+        addColorConst(m, DARKPURPLE, "DARKPURPLE");
+        addColorConst(m, BEIGE, "BEIGE");
+        addColorConst(m, BROWN, "BROWN");
+        addColorConst(m, DARKBROWN, "DARKBROWN");
+        addColorConst(m, WHITE, "WHITE");
+        addColorConst(m, BLACK, "BLACK");
+        addColorConst(m, BLANK, "BLANK");
+        addColorConst(m, MAGENTA, "MAGENTA");
+        addColorConst(m, RAYWHITE, "RAYWHITE");
 
         m->add(user_type<Rectangle>(), "Rectangle");
         m->add(constructor<Rectangle()>(), "Rectangle");
@@ -186,6 +214,18 @@ namespace chaiscript {
       }
 
       /**
+       * Text drawing functions
+       */
+      ModulePtr addTextDrawing(ModulePtr m = std::make_shared<Module>()) {
+        m->add(fun(&DrawFPS), "DrawFPS");
+        m->add(fun([](const std::string& text, int posX, int posY, int fontSize, Color color) {
+          DrawText(text.c_str(), posX, posY, fontSize, color);
+        }), "DrawText");
+
+        return m;
+      }
+
+      /**
        * Bootstrap a ChaiScript module with raylib support.
        */
       ModulePtr bootstrap(ModulePtr m = std::make_shared<Module>())
@@ -196,6 +236,9 @@ namespace chaiscript {
         addStructureDefinitions(m);
         addColor(m);
         addMisc(m);
+        addDrawing(m);
+        addScreenSpace(m);
+        addTextDrawing(m);
 
         return m;
       }
