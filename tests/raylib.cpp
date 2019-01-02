@@ -26,7 +26,15 @@ TEST_CASE( "raylib functions work", "[raylib]" ) {
   	var width = 800
   	var height = 450
     InitWindow(width, height, "raylib [core] example - basic window")
+    global screenWidth = GetScreenWidth()
     CloseWindow()
   )"");
-  CHECK(chai.eval<int>("width") == 800);
+  CHECK(chai.eval<int>("screenWidth") == 800);
+
+  // Color
+  chai.eval(R""(
+    var col = LIGHTGRAY;
+    var gr = PINK;
+  )"");
+  CHECK(chai.eval<unsigned char>("gr.g") == 109);
 }
