@@ -54,6 +54,10 @@ To integrate *raylib-chaiscript* directly into an existing project, the single h
 There is a launcher tool to quickly launch .chai files with raylib. [rChaiScriptLauncher](tools/rChaiScriptLauncher/rChaiScriptLauncher.cpp) allows running raylib-chaiscript
 programs from the command line, or just with *drag & drop* of .chai files into *rChaiScriptLauncher.exe*.
 
+```
+./rChaiScriptLauncher core_basic_window.chai
+```
+
 It can be compiled for other platforms, just need to link with ChaiScript library and raylib library. For more details, just check comments on [rChaiScriptLauncher.cpp](tools/rChaiScriptLauncher/rChaiScriptLauncher.cpp).
 
 ## License
