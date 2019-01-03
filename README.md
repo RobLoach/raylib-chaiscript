@@ -27,7 +27,7 @@ Check for more [examples](examples) organized by raylib modules.
 
 ## Usage
 
-There are a number of ways to use *raylib-chaiscript*. There are two examples documented below...
+There are a number of ways to use *raylib-chaiscript*. The following covers its API binding, and a launcher tool...
 
 ### API Binding
 
