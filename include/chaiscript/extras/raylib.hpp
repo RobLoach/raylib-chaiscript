@@ -17,6 +17,9 @@ namespace chaiscript {
        */
       ModulePtr addWindow(ModulePtr m = std::make_shared<Module>()) {
         m->add(fun(&InitWindow), "InitWindow");
+        m->add(fun(&ShowWindow), "ShowWindow");
+        m->add(fun(&HideWindow), "HideWindow");
+        m->add(fun(&IsWindowHidden), "IsWindowHidden");
         m->add(fun(&CloseWindow), "CloseWindow");
         m->add(fun(&IsWindowReady), "IsWindowReady");
         m->add(fun(&WindowShouldClose), "WindowShouldClose");
@@ -475,7 +478,6 @@ namespace chaiscript {
        * Misc. functions
        */
       ModulePtr addMisc(ModulePtr m = std::make_shared<Module>()) {
-        m->add(fun(&ShowLogo), "ShowLogo");
         m->add(fun(&ColorNormalize), "ColorNormalize");
         m->add(fun(&SetTraceLog), "SetTraceLog");
         // TODO: m->add(fun(&TraceLog), "TraceLog");
@@ -858,7 +860,7 @@ namespace chaiscript {
         m->add(fun(&GetTextureDefault), "GetTextureDefault");
         m->add(fun(&GetShaderLocation), "GetShaderLocation");
         m->add(fun(&SetShaderValue), "SetShaderValue");
-        m->add(fun(&SetShaderValuei), "SetShaderValuei");
+        m->add(fun(&SetShaderValueV), "SetShaderValueV");
         m->add(fun(&SetShaderValueMatrix), "SetShaderValueMatrix");
         m->add(fun(&SetMatrixProjection), "SetMatrixProjection");
         m->add(fun(&SetMatrixModelview), "SetMatrixModelview");

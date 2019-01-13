@@ -196,7 +196,7 @@ if (NOT raylib_FOUND) # If there's none, fetch and build raylib
 
   FetchContent_Declare(
     raylib
-    URL https://github.com/raysan5/raylib/archive/master.tar.gz
+    URL https://github.com/raysan5/raylib/archive/49a69e3e2746fc8961097c8ef9cbedc6a0a66984.tar.gz
   )
 
   FetchContent_GetProperties(raylib)
