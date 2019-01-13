@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.11)
-project(chaiscript_extras_raylib)
+project(raylib-chaiscript)
 
 find_package(Git QUIET)
 if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
@@ -215,12 +215,12 @@ if (NOT raylib_FOUND) # If there's none, fetch and build raylib
 endif()
 
 file(GLOB SOURCES
-  rChaiScriptLauncher.cpp
+  raylib-chaiscript.cpp
 )
 
 include_directories( ../../vendor/raylib/src )
 
 # rChaiScriptLauncher
-add_executable(rChaiScriptLauncher ${SOURCES})
+add_executable(raylib-chaiscript ${SOURCES})
 
 target_link_libraries(rChaiScriptLauncher ${LIBS})

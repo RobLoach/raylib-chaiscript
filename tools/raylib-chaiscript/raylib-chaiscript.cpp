@@ -1,6 +1,6 @@
 /*******************************************************************************************
 *
-*   rChaiScriptLauncher v0.0.1 - raylib ChaiScript Launcher
+*   raylib-chaiscript v0.0.1 - raylib ChaiScript Launcher
 *
 *   DEPENDENCIES:
 *
@@ -17,9 +17,9 @@
 *   USAGE:
 *
 *     Just launch your raylib .lua file from command line:
-*       ./rChaiScriptLauncher core_basic_window.chai
+*       ./raylib-chaiscript core_basic_window.chai
 *
-*     or drag & drop your .chai file over rChaiScriptLauncher.exe
+*     or drag & drop your .chai file over raylib-chaiscript.exe
 *
 *
 *   LICENSE: zlib/libpng
