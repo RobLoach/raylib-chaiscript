@@ -250,7 +250,7 @@ file(GLOB SOURCES
   tests/raylib.cpp
 )
 
-include_directories( vendor/raylib/src )
+include_directories(${raylib_SOURCE_DIR}/src)
 
 # Raylib Test
 add_executable(raylib_test ${SOURCES})

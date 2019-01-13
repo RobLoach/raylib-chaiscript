@@ -218,7 +218,7 @@ file(GLOB SOURCES
   raylib-chaiscript.cpp
 )
 
-include_directories( ../../vendor/raylib/src )
+include_directories(${raylib_SOURCE_DIR}/src)
 
 # rChaiScriptLauncher
 add_executable(raylib-chaiscript ${SOURCES})
