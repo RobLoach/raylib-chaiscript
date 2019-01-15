@@ -49,20 +49,20 @@ To integrate *raylib-chaiscript* directly into an existing project, the single h
     chai.eval_file("core_basic_window.chai");
     ```
 
-### rChaiScriptLauncher
+### CLI
 
-There is a launcher tool to quickly launch .chai files with raylib. [rChaiScriptLauncher](tools/rChaiScriptLauncher/rChaiScriptLauncher.cpp) allows running raylib-chaiscript
-programs from the command line, or just with *drag & drop* of .chai files into *rChaiScriptLauncher.exe*.
+There is a command-line interface tool to quickly launch .chai files with raylib, named [raylib-chaiscript](tools/raylib-chaiscript/raylib-chaiscript.cpp). This allows running raylib-chaiscript
+.chai scripts directly from the command line, or just with *drag & drop* of .chai files into *raylib-chaiscript.exe*.
 
 ```
-./rChaiScriptLauncher core_basic_window.chai
+./raylib-chaiscript core_basic_window.chai
 ```
 
-It can be compiled for other platforms, just need to link with ChaiScript library and raylib library. For more details, just check comments on [rChaiScriptLauncher.cpp](tools/rChaiScriptLauncher/rChaiScriptLauncher.cpp).
+It can be compiled for other platforms, just need to link with ChaiScript library and raylib library. For more details, just check comments on [raylib-chaiscript.cpp](tools/raylib-chaiscript/raylib-chaiscript.cpp).
 
 ## License
 
-*raylib-chaiscript* is licensed under an unmodified zlib/libpng license, which is an OSI-certified, 
+*raylib-chaiscript* is licensed under an unmodified zlib/libpng license, which is an OSI-certified,
 BSD-like license that allows static linking with closed source software. Check [LICENSE](LICENSE) for further details.
 
 *Copyright (c) 2018 Rob Loach ([@RobLoach](https://twitter.com/RobLoach))*
