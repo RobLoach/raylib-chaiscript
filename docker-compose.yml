@@ -1,7 +1,14 @@
+# Docker Compose
+# https://docs.docker.com/compose/
+#
+# Runs the raylib-chaiscript tests.
+#
+# Usage:
+#     docker-compose up
 
 version: '3'
 services:
-    cmake:
+    raylib:
         image: 'indusninja/opengl'
         command: >
             sh -c "rm -rf build && mkdir build && cd build && cmake .. && make && make test"
