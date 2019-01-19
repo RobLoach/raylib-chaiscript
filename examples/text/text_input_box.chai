@@ -1,0 +1,133 @@
+/*******************************************************************************************
+*
+*   raylib [text] example - Input Box
+*
+*   This example has been created using raylib 1.7 (www.raylib.com)
+*   raylib is licensed under an unmodified zlib/libpng license (View raylib.h for details)
+*
+*   Copyright (c) 2017 Ramon Santamaria (@raysan5)
+*
+********************************************************************************************/
+
+global MAX_INPUT_CHARS = 9
+
+// Initialization
+//--------------------------------------------------------------------------------------
+var screenWidth = 800;
+var screenHeight = 450;
+
+InitWindow(screenWidth, screenHeight, "raylib [text] example - input box");
+
+var name = "";
+var letterCount = 0;
+
+var textBox = Rectangle()
+textBox.x = screenWidth / 2 - 100
+textBox.y = 180
+textBox.width = 225
+textBox.height = 50
+
+var mouseOnText = false;
+
+var framesCounter = 0;
+
+SetTargetFPS(60);
+//--------------------------------------------------------------------------------------
+
+
+
+// Main game loop
+while (!WindowShouldClose())    // Detect window close button or ESC key
+{
+    // Update
+    //----------------------------------------------------------------------------------
+    if (CheckCollisionPointRec(GetMousePosition(), textBox)) {
+        mouseOnText = true;
+    }
+    else {
+        mouseOnText = false;
+    }
+
+    if (mouseOnText)
+    {
+        var key = GetKeyPressed();
+
+        // NOTE: Only allow keys in range [32..125]
+        if ((key >= 32) && (key <= 125) && (letterCount < MAX_INPUT_CHARS))
+        {
+            name.push_back(to_char(key));
+            letterCount = letterCount + 1;
+        }
+
+        if (IsKeyPressed(KEY_BACKSPACE))
+        {
+            letterCount = letterCount - 1;
+            name = name.substr(0, letterCount);
+
+            if (letterCount < 0) {
+                letterCount = 0;
+            }
+        }
+    }
+
+    if (mouseOnText) {
+        framesCounter = framesCounter + 1;
+    }
+    else {
+        framesCounter = 0;
+    }
+    //----------------------------------------------------------------------------------
+
+    // Draw
+    //----------------------------------------------------------------------------------
+    BeginDrawing();
+
+        ClearBackground(RAYWHITE);
+
+        DrawText("PLACE MOUSE OVER INPUT BOX!", 240, 140, 20, GRAY);
+
+        DrawRectangleRec(textBox, LIGHTGRAY);
+        if (mouseOnText) {
+            DrawRectangleLines(textBox.x, textBox.y, textBox.width, textBox.height, RED);
+        }
+        else {
+            DrawRectangleLines(textBox.x, textBox.y, textBox.width, textBox.height, DARKGRAY);
+        }
+
+        DrawText(name, textBox.x + 5, textBox.y + 8, 40, MAROON);
+
+        DrawText(FormatText("INPUT CHARS: %i/%i", letterCount, MAX_INPUT_CHARS), 315, 250, 20, DARKGRAY);
+
+        if (mouseOnText) {
+            if (letterCount < MAX_INPUT_CHARS) {
+                // Draw blinking underscore char
+                if (((framesCounter/20)%2) == 0) {
+                    DrawText("_", textBox.x + 8 + MeasureText(name, 40), textBox.y + 12, 40, MAROON);
+                }
+            }
+            else {
+                DrawText("Press BACKSPACE to delete chars...", 230, 300, 20, GRAY);
+            }
+        }
+
+    EndDrawing();
+    //----------------------------------------------------------------------------------
+}
+
+// De-Initialization
+//--------------------------------------------------------------------------------------
+CloseWindow();        // Close window and OpenGL context
+//--------------------------------------------------------------------------------------
+
+// Check if any key is pressed
+// NOTE: We limit keys check to keys between 32 (KEY_SPACE) and 126
+def IsAnyKeyPressed() {
+    var keyPressed = false;
+    var key = GetKeyPressed();
+
+    if ((key >= 32) && (key <= 126)) {
+        keyPressed = true;
+    }
+
+    return keyPressed;
+}
