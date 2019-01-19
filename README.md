@@ -1,6 +1,7 @@
 <img src="logo/raylib_256x256.png" width=256>
 
 # raylib-chaiscript
+[![TravisCI Build Status](https://travis-ci.org/RobLoach/raylib-chaiscript.svg?branch=master)](https://travis-ci.org/RobLoach/raylib-chaiscript)
 
 [ChaiScript](https://chaiscript.com) bindings for [raylib](https://www.raylib.com/), a simple and easy-to-use library to enjoy videogames programming (www.raylib.com)
 
