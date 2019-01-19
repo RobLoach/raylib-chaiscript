@@ -43,7 +43,7 @@
 *
 ********************************************************************************************/
 
-#include "../../include/chaiscript/extras/raylib.hpp"
+#include "chaiscript/extras/raylib.hpp"
 
 int main(int argc, char *argv[])
 {

@@ -9,7 +9,7 @@
 /**
  * Load the Raylib library.
  */
-#include "../include/chaiscript/extras/raylib.hpp"
+#include "chaiscript/extras/raylib.hpp"
 
 TEST_CASE( "raylib functions work", "[raylib]" ) {
 

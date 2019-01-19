@@ -1,25 +1,6 @@
 cmake_minimum_required(VERSION 3.11)
 project(chaiscript_extras_raylib)
 
-find_package(Git QUIET)
-if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
-# Update submodules as needed
-    option(GIT_SUBMODULE "Check submodules during build" ON)
-    if(GIT_SUBMODULE)
-        message(STATUS "Submodule update")
-        execute_process(COMMAND ${GIT_EXECUTABLE} submodule update --init --recursive
-                        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-                        RESULT_VARIABLE GIT_SUBMOD_RESULT)
-        if(NOT GIT_SUBMOD_RESULT EQUAL "0")
-            message(FATAL_ERROR "git submodule update --init failed with ${GIT_SUBMOD_RESULT}, please checkout submodules")
-        endif()
-    endif()
-endif()
-
-if(NOT EXISTS "${PROJECT_SOURCE_DIR}/vendor/raylib/README.md")
-    message(FATAL_ERROR "The submodules were not downloaded! GIT_SUBMODULE was turned off or failed. Please update submodules and try again.")
-endif()
-
 # MINGW does not yet support C++11's concurrency features
 if(MINGW)
   option(MULTITHREAD_SUPPORT_ENABLED "Multithreaded Support Enabled" FALSE)
@@ -81,8 +62,6 @@ if(CMAKE_COMPILER_IS_GNUCC OR "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
     add_definitions(-fprofile-use)
     set(LINKER_FLAGS "${LINKER_FLAGS} -fprofile-use")
   endif()
-
-
 endif()
 
 include(CTest)
@@ -152,7 +131,6 @@ if(MINGW OR CYGWIN)
   add_definitions(-O3)
 endif()
 
-
 if(NOT MULTITHREAD_SUPPORT_ENABLED)
   add_definitions(-DCHAISCRIPT_NO_THREADS)
 endif()
@@ -179,81 +157,14 @@ if(CMAKE_HOST_UNIX)
 
 endif()
 
-list(APPEND LIBS raylib)
-
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${LINKER_FLAGS}")
 set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} ${LINKER_FLAGS}")
 set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} ${LINKER_FLAGS}")
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
-# ChaiScript
-include_directories( vendor/ChaiScript/include )
-
-# Add catch tests macro
-macro(ADD_CATCH_TESTS executable)
-  if (MSVC)
-    file(TO_NATIVE_PATH "${QT_LIBRARY_DIR}" QT_LIB_PATH)
-    set(NEWPATH "${QT_LIB_PATH};$ENV{PATH}")
-  else()
-    set(NEWPATH $ENV{PATH})
-  endif()
-
-  get_target_property(target_files ${executable} SOURCES)
-
-  message("Files: ${target_files}")
-
-  foreach(source ${target_files})
-    if(NOT "${source}" MATCHES "/moc_.*cxx")
-      string(REGEX MATCH .*cpp source "${source}")
-      if(source)
-        file(READ "${source}" contents)
-        string(REGEX MATCHALL "TEST_CASE\\([ ]*\"[^\"]+\"" found_tests ${contents})
-        foreach(hit ${found_tests})
-          message("Found Test: ${hit}")
-          string(REGEX REPLACE "TEST_CASE\\([ ]*(\"[^\"]+\").*" "\\1" test_name ${hit})
-          add_test(${test_name} "${executable}" ${test_name})
-          set_tests_properties(${test_name} PROPERTIES TIMEOUT 660 ENVIRONMENT "PATH=${NEWPATH}")
-        endforeach()
-      endif()
-    endif()
-  endforeach()
-endmacro()
-
-# raylib
-find_package(raylib 2.0 QUIET) # Let CMake search for a raylib-config.cmake
-
-# You could change the QUIET above to REQUIRED and remove this if() clause
-# This part downloads raylib and builds it if it's not installed on your system
-if (NOT raylib_FOUND) # If there's none, fetch and build raylib
-  include(FetchContent)
-
-  FetchContent_Declare(
-    raylib
-    URL https://github.com/raysan5/raylib/archive/master.tar.gz
-  )
-
-  FetchContent_GetProperties(raylib)
-  if (NOT raylib_POPULATED) # Have we downloaded raylib yet?
-    set(FETCHCONTENT_QUIET NO)
-    FetchContent_Populate(raylib)
-
-    set(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE) # don't build the supplied examples
-    set(BUILD_GAMES    OFF CACHE BOOL "" FORCE) # or games
-
-    # build raylib
-    add_subdirectory(${raylib_SOURCE_DIR} ${raylib_BINARY_DIR})
-
-  endif()
-
+configure_file(${CMAKE_SOURCE_DIR}/cmake/CTestCustom.cmake ${CMAKE_BINARY_DIR})
+include_directories(include)
+if(BUILD_TESTING)
+    add_subdirectory(tests)
 endif()
-
-file(GLOB SOURCES
-  tests/raylib.cpp
-)
-
-include_directories(${raylib_SOURCE_DIR}/src)
-
-# Raylib Test
-add_executable(raylib_test ${SOURCES})
-
-target_link_libraries(raylib_test ${LIBS})
-ADD_CATCH_TESTS(raylib_test)
+add_subdirectory(tools/raylib-chaiscript)

@@ -17,7 +17,7 @@ namespace chaiscript {
        */
       ModulePtr addWindow(ModulePtr m = std::make_shared<Module>()) {
         m->add(fun(&InitWindow), "InitWindow");
-        m->add(fun(&ShowWindow), "ShowWindow");
+        m->add(fun(&UnhideWindow), "UnhideWindow");
         m->add(fun(&HideWindow), "HideWindow");
         m->add(fun(&IsWindowHidden), "IsWindowHidden");
         m->add(fun(&CloseWindow), "CloseWindow");
