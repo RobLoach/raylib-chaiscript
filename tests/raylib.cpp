@@ -11,7 +11,7 @@
  */
 #include "chaiscript/extras/raylib.hpp"
 
-TEST_CASE( "raylib functions work", "[raylib]" ) {
+TEST_CASE( "raylib-chaiscript functions work", "[raylib]" ) {
 
   auto raylib = chaiscript::extras::raylib::bootstrap();
 
@@ -23,13 +23,9 @@ TEST_CASE( "raylib functions work", "[raylib]" ) {
 
   // Window
   chai.eval(R""(
-  	var width = 800
-  	var height = 450
-    InitWindow(width, height, "raylib [core] example - basic window")
-    global screenWidth = GetScreenWidth()
-    CloseWindow()
+  	var windowReady = IsWindowReady()
   )"");
-  CHECK(chai.eval<int>("screenWidth") == 800);
+  CHECK(chai.eval<bool>("windowReady") == false);
 
   // Colors
   chai.eval(R""(
