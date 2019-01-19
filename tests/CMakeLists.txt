@@ -35,10 +35,13 @@ find_package(ChaiScript)
 
 list(APPEND SOURCES catch.hpp raylib.cpp)
 list(APPEND LIBS raylib)
-add_executable(raylib_test ${SOURCES})
+add_executable(raylib_test raylib.cpp catch.hpp)
 target_include_directories(raylib_test PUBLIC
     ${raylib_SOURCE_DIR}/src
     ${chaiscript_SOURCE_DIR}/include
 )
 target_link_libraries(raylib_test ${LIBS})
+set_target_properties(raylib_test PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+)
 ADD_CATCH_TESTS(raylib_test)
