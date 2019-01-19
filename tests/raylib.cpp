@@ -21,7 +21,7 @@ TEST_CASE( "raylib-chaiscript functions work", "[raylib]" ) {
   // Add the library to the ChaiScript instance.
   chai.add(raylib);
 
-  // Window
+  // Functions
   chai.eval(R""(
   	var windowReady = IsWindowReady()
   )"");
@@ -29,13 +29,21 @@ TEST_CASE( "raylib-chaiscript functions work", "[raylib]" ) {
 
   // Colors
   chai.eval(R""(
-    var hotPink = PINK;
+    var hotPink = PINK
+    var testColor = Color(140, 200, 13)
   )"");
   CHECK(chai.eval<unsigned char>("hotPink.g") == 109);
+  CHECK(chai.eval<unsigned char>("testColor.g") == 200);
 
   // Enums
   chai.eval(R""(
     var period = KEY_PERIOD;
   )"");
   CHECK(chai.eval<int>("period") == KEY_PERIOD);
+
+  // Rectangle
+  chai.eval(R""(
+    var rect = Rectangle(50, 80, 10, 20);
+  )"");
+  CHECK(chai.eval<float>("rect.x") == 50.0f);
 }

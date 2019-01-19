@@ -21,11 +21,7 @@ InitWindow(screenWidth, screenHeight, "raylib [text] example - input box");
 var name = "";
 var letterCount = 0;
 
-var textBox = Rectangle()
-textBox.x = screenWidth / 2 - 100
-textBox.y = 180
-textBox.width = 225
-textBox.height = 50
+var textBox = Rectangle(screenWidth / 2 - 100, 180, 225, 50)
 
 var mouseOnText = false;
 

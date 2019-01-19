@@ -16,9 +16,7 @@ var screenHeight = 450;
 
 InitWindow(screenWidth, screenHeight, "raylib [core] example - keyboard input");
 
-var ballPosition = Vector2()
-ballPosition.x = screenWidth / 2.0f
-ballPosition.y = screenHeight / 2.0f
+var ballPosition = Vector2(screenWidth / 2.0f, screenHeight / 2.0f);
 
 SetTargetFPS(60);       // Set target frames-per-second
 //--------------------------------------------------------------------------------------

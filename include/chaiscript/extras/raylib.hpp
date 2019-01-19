@@ -110,12 +110,18 @@ namespace chaiscript {
         m->add(user_type<Vector2>(), "Vector2");
         m->add(constructor<Vector2()>(), "Vector2");
         m->add(constructor<Vector2(const Vector2 &)>(), "Vector2");
+        m->add(fun([](float x, float y) {
+            return Vector2{x, y};
+        }), "Vector2");
         m->add(fun(&Vector2::x), "x");
         m->add(fun(&Vector2::y), "y");
 
         m->add(user_type<Vector2>(), "Vector3");
         m->add(constructor<Vector3()>(), "Vector3");
         m->add(constructor<Vector3(const Vector3 &)>(), "Vector3");
+        m->add(fun([](float x, float y, float z) {
+            return Vector3{x, y, z};
+        }), "Vector3");
         m->add(fun(&Vector3::x), "x");
         m->add(fun(&Vector3::y), "y");
         m->add(fun(&Vector3::z), "z");
@@ -123,6 +129,9 @@ namespace chaiscript {
         m->add(user_type<Vector4>(), "Vector4");
         m->add(constructor<Vector4()>(), "Vector4");
         m->add(constructor<Vector4(const Vector4 &)>(), "Vector4");
+        m->add(fun([](float x, float y, float z, float w) {
+            return Vector4{x, y, z, w};
+        }), "Vector4");
         m->add(fun(&Vector4::x), "x");
         m->add(fun(&Vector4::y), "y");
         m->add(fun(&Vector4::z), "z");
@@ -131,6 +140,12 @@ namespace chaiscript {
         m->add(user_type<Color>(), "Color");
         m->add(constructor<Color()>(), "Color");
         m->add(constructor<Color(const Color &)>(), "Color");
+        m->add(fun([](unsigned char r, unsigned char g, unsigned char b, unsigned char a) {
+            return Color{r, g, b, a};
+        }), "Color");
+        m->add(fun([](unsigned char r, unsigned char g, unsigned char b) {
+            return Color{r, g, b, 255};
+        }), "Color");
         m->add(fun(&Color::r), "r");
         m->add(fun(&Color::g), "g");
         m->add(fun(&Color::b), "b");
@@ -167,6 +182,9 @@ namespace chaiscript {
         m->add(user_type<Rectangle>(), "Rectangle");
         m->add(constructor<Rectangle()>(), "Rectangle");
         m->add(constructor<Rectangle(const Rectangle &)>(), "Rectangle");
+        m->add(fun([](float x, float y, float width, float height) {
+            return Rectangle{x, y, width, height};
+        }), "Rectangle");
         m->add(fun(&Rectangle::x), "x");
         m->add(fun(&Rectangle::y), "y");
         m->add(fun(&Rectangle::width), "width");
