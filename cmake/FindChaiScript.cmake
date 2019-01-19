@@ -12,6 +12,8 @@ if (NOT chaiscript_FOUND)
     FetchContent_Populate(chaiscript)
     set(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE) # don't build the supplied examples
     set(BUILD_GAMES    OFF CACHE BOOL "" FORCE) # or games
+    set(BUILD_TEST    OFF CACHE BOOL "" FORCE) # or tests
+    set(BUILD_TESTING    OFF CACHE BOOL "" FORCE) # or tests
     add_subdirectory(${chaiscript_SOURCE_DIR} ${chaiscript_BINARY_DIR})
   endif()
 endif()

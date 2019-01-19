@@ -41,7 +41,7 @@ target_include_directories(raylib_test PUBLIC
     ${chaiscript_SOURCE_DIR}/include
 )
 target_link_libraries(raylib_test ${LIBS})
-set_target_properties(raylib_test PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
-)
+#set_target_properties(raylib_test PROPERTIES
+#    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+#)
 ADD_CATCH_TESTS(raylib_test)

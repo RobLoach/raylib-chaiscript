@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.11)
 project(chaiscript_extras_raylib)
 
+set(chaiscript_BUILD_TESTS 0)
+set(chaiscript_BUILD_TESTING 0)
+
 # MINGW does not yet support C++11's concurrency features
 if(MINGW)
   option(MULTITHREAD_SUPPORT_ENABLED "Multithreaded Support Enabled" FALSE)
