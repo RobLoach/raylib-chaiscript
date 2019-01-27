@@ -309,11 +309,14 @@ namespace chaiscript {
         addConst(m, FLAG_MSAA_4X_HINT, "FLAG_MSAA_4X_HINT");
         addConst(m, FLAG_VSYNC_HINT, "FLAG_VSYNC_HINT");
 
+        addConst(m, LOG_ALL, "LOG_ALL");
+        addConst(m, LOG_TRACE, "LOG_TRACE");
+        addConst(m, LOG_DEBUG, "LOG_DEBUG");
         addConst(m, LOG_INFO, "LOG_INFO");
         addConst(m, LOG_WARNING, "LOG_WARNING");
         addConst(m, LOG_ERROR, "LOG_ERROR");
-        addConst(m, LOG_DEBUG, "LOG_DEBUG");
-        addConst(m, LOG_OTHER, "LOG_OTHER");
+        addConst(m, LOG_FATAL, "LOG_FATAL");
+        addConst(m, LOG_NONE, "LOG_NONE");
 
         addConst(m, KEY_APOSTROPHE, "KEY_APOSTROPHE");
         addConst(m, KEY_COMMA, "KEY_COMMA");
@@ -496,9 +499,12 @@ namespace chaiscript {
        * Misc. functions
        */
       ModulePtr addMisc(ModulePtr m = std::make_shared<Module>()) {
-        m->add(fun(&ColorNormalize), "ColorNormalize");
-        m->add(fun(&SetTraceLog), "SetTraceLog");
-        // TODO: m->add(fun(&TraceLog), "TraceLog");
+        m->add(fun(&SetConfigFlags), "SetConfigFlags");
+        m->add(fun(&SetTraceLogLevel), "SetTraceLogLevel");
+        m->add(fun(&SetTraceLogExit), "SetTraceLogExit");
+        // TODO: Fix SetTraceLogCallback and TraceLog
+        //m->add(fun(&SetTraceLogCallback), "SetTraceLogCallback");
+        //m->add(fun(&TraceLog), "TraceLog");
         m->add(fun(&TakeScreenshot), "TakeScreenshot");
         m->add(fun(&GetRandomValue), "GetRandomValue");
 
