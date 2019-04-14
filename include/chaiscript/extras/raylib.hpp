@@ -25,6 +25,7 @@ namespace chaiscript {
         m->add(fun(&IsWindowHidden), "IsWindowHidden");
         m->add(fun(&ToggleFullscreen), "ToggleFullscreen");
         m->add(fun(&UnhideWindow), "UnhideWindow");
+        m->add(fun(&UnhideWindow), "ShowWindow");
         m->add(fun(&HideWindow), "HideWindow");
         m->add(fun(&SetWindowIcon), "SetWindowIcon");
         m->add(fun(&SetWindowTitle), "SetWindowTitle");
@@ -139,6 +140,38 @@ namespace chaiscript {
         m->add(fun(&Vector4::y), "y");
         m->add(fun(&Vector4::z), "z");
         m->add(fun(&Vector4::w), "w");
+
+        m->add(user_type<Matrix>(), "Matrix");
+        m->add(constructor<Matrix()>(), "Matrix");
+        m->add(constructor<Matrix(const Matrix &)>(), "Matrix");
+        m->add(fun([](
+            float m0, float m4, float m8, float m12,
+            float m1, float m5, float m9, float m13,
+            float m2, float m6, float m10, float m14,
+            float m3, float m7, float m11, float m15) {
+            return Matrix{
+                m0, m4, m8, m12,
+                m1, m5, m9, m13,
+                m2, m6, m10, m14,
+                m3, m7, m11, m15
+            };
+        }), "Matrix");
+        m->add(fun(&Matrix::m0), "m0");
+        m->add(fun(&Matrix::m1), "m1");
+        m->add(fun(&Matrix::m2), "m2");
+        m->add(fun(&Matrix::m3), "m3");
+        m->add(fun(&Matrix::m4), "m4");
+        m->add(fun(&Matrix::m5), "m5");
+        m->add(fun(&Matrix::m6), "m6");
+        m->add(fun(&Matrix::m7), "m7");
+        m->add(fun(&Matrix::m8), "m8");
+        m->add(fun(&Matrix::m9), "m9");
+        m->add(fun(&Matrix::m10), "m10");
+        m->add(fun(&Matrix::m11), "m11");
+        m->add(fun(&Matrix::m12), "m12");
+        m->add(fun(&Matrix::m13), "m13");
+        m->add(fun(&Matrix::m14), "m14");
+        m->add(fun(&Matrix::m15), "m15");
 
         m->add(user_type<Color>(), "Color");
         m->add(constructor<Color()>(), "Color");
@@ -271,13 +304,26 @@ namespace chaiscript {
         m->add(fun(&Camera2D::rotation), "rotation");
         m->add(fun(&Camera2D::zoom), "zoom");
 
+        // TODO: Add Mesh, Shader, Material, Model, RayHitInfo
+
+        m->add(user_type<MaterialMap>(), "MaterialMap");
+        m->add(constructor<MaterialMap()>(), "MaterialMap");
+        m->add(constructor<MaterialMap(const MaterialMap &)>(), "MaterialMap");
+        m->add(fun(&MaterialMap::texture), "texture");
+        m->add(fun(&MaterialMap::color), "color");
+        m->add(fun(&MaterialMap::value), "value");
+
+        m->add(user_type<Ray>(), "Ray");
+        m->add(constructor<Ray()>(), "Ray");
+        m->add(constructor<Ray(const Ray &)>(), "Ray");
+        m->add(fun(&Ray::position), "position");
+        m->add(fun(&Ray::direction), "direction");
+
         m->add(user_type<BoundingBox>(), "BoundingBox");
         m->add(constructor<BoundingBox()>(), "BoundingBox");
         m->add(constructor<BoundingBox(const BoundingBox &)>(), "BoundingBox");
         m->add(fun(&BoundingBox::min), "min");
         m->add(fun(&BoundingBox::max), "max");
-
-        // TODO: Add Mesh, Shader, MaterialMap, Material, Model, Ray, RayHitInfo
 
         m->add(user_type<Wave>(), "Wave");
         m->add(constructor<Wave()>(), "Wave");
@@ -294,7 +340,21 @@ namespace chaiscript {
         m->add(fun(&Sound::buffer), "buffer");
         m->add(fun(&Sound::format), "format");
 
-        // TODO: Add AudioStream, VrDeviceInfo
+        // TODO: Add AudioStream,
+
+        m->add(user_type<VrDeviceInfo>(), "VrDeviceInfo");
+        m->add(constructor<VrDeviceInfo()>(), "VrDeviceInfo");
+        m->add(constructor<VrDeviceInfo(const VrDeviceInfo &)>(), "VrDeviceInfo");
+        m->add(fun(&VrDeviceInfo::hResolution), "hResolution");
+        m->add(fun(&VrDeviceInfo::vResolution), "vResolution");
+        m->add(fun(&VrDeviceInfo::hScreenSize), "hScreenSize");
+        m->add(fun(&VrDeviceInfo::vScreenSize), "vScreenSize");
+        m->add(fun(&VrDeviceInfo::vScreenCenter), "vScreenCenter");
+        m->add(fun(&VrDeviceInfo::eyeToScreenDistance), "eyeToScreenDistance");
+        m->add(fun(&VrDeviceInfo::lensSeparationDistance), "lensSeparationDistance");
+        m->add(fun(&VrDeviceInfo::interpupillaryDistance), "interpupillaryDistance");
+        m->add(fun(&VrDeviceInfo::lensDistortionValues), "lensDistortionValues");
+        m->add(fun(&VrDeviceInfo::chromaAbCorrection), "chromaAbCorrection");
 
         return m;
       }
@@ -304,6 +364,7 @@ namespace chaiscript {
       }
 
       ModulePtr addEnums(ModulePtr m = std::make_shared<Module>()) {
+        // System config flags
         addConst(m, FLAG_SHOW_LOGO, "FLAG_SHOW_LOGO");
         addConst(m, FLAG_FULLSCREEN_MODE, "FLAG_FULLSCREEN_MODE");
         addConst(m, FLAG_WINDOW_RESIZABLE, "FLAG_WINDOW_RESIZABLE");
@@ -312,6 +373,7 @@ namespace chaiscript {
         addConst(m, FLAG_MSAA_4X_HINT, "FLAG_MSAA_4X_HINT");
         addConst(m, FLAG_VSYNC_HINT, "FLAG_VSYNC_HINT");
 
+        // Trace log type
         addConst(m, LOG_ALL, "LOG_ALL");
         addConst(m, LOG_TRACE, "LOG_TRACE");
         addConst(m, LOG_DEBUG, "LOG_DEBUG");
@@ -321,6 +383,7 @@ namespace chaiscript {
         addConst(m, LOG_FATAL, "LOG_FATAL");
         addConst(m, LOG_NONE, "LOG_NONE");
 
+        // Keyboard keys
         addConst(m, KEY_APOSTROPHE, "KEY_APOSTROPHE");
         addConst(m, KEY_COMMA, "KEY_COMMA");
         addConst(m, KEY_MINUS, "KEY_MINUS");
@@ -364,6 +427,8 @@ namespace chaiscript {
         addConst(m, KEY_X, "KEY_X");
         addConst(m, KEY_Y, "KEY_Y");
         addConst(m, KEY_Z, "KEY_Z");
+
+        // Function keys
         addConst(m, KEY_SPACE, "KEY_SPACE");
         addConst(m, KEY_ESCAPE, "KEY_ESCAPE");
         addConst(m, KEY_ENTER, "KEY_ENTER");
@@ -409,6 +474,8 @@ namespace chaiscript {
         addConst(m, KEY_BACKSLASH, "KEY_BACKSLASH");
         addConst(m, KEY_RIGHT_BRACKET, "KEY_RIGHT_BRACKET");
         addConst(m, KEY_GRAVE, "KEY_GRAVE");
+
+        // Keypad keys
         addConst(m, KEY_KP_0, "KEY_KP_0");
         addConst(m, KEY_KP_1, "KEY_KP_1");
         addConst(m, KEY_KP_2, "KEY_KP_2");
@@ -427,15 +494,18 @@ namespace chaiscript {
         addConst(m, KEY_KP_ENTER, "KEY_KP_ENTER");
         addConst(m, KEY_KP_EQUAL, "KEY_KP_EQUAL");
 
+        // Android buttons
         addConst(m, KEY_BACK, "KEY_BACK");
         addConst(m, KEY_MENU, "KEY_MENU");
         addConst(m, KEY_VOLUME_UP, "KEY_VOLUME_UP");
         addConst(m, KEY_VOLUME_DOWN, "KEY_VOLUME_DOWN");
 
+        // Mouse buttons
         addConst(m, MOUSE_LEFT_BUTTON, "MOUSE_LEFT_BUTTON");
         addConst(m, MOUSE_RIGHT_BUTTON, "MOUSE_RIGHT_BUTTON");
         addConst(m, MOUSE_MIDDLE_BUTTON, "MOUSE_MIDDLE_BUTTON");
 
+        // Gamepad number
         addConst(m, GAMEPAD_PLAYER1, "GAMEPAD_PLAYER1");
         addConst(m, GAMEPAD_PLAYER2, "GAMEPAD_PLAYER2");
         addConst(m, GAMEPAD_PLAYER3, "GAMEPAD_PLAYER3");
@@ -443,6 +513,7 @@ namespace chaiscript {
 
         // TODO: Add PS3 USB Controller Buttons and Axis buttons
 
+        // Xbox360 USB Controller Buttons
         addConst(m, GAMEPAD_XBOX_BUTTON_A, "GAMEPAD_XBOX_BUTTON_A");
         addConst(m, GAMEPAD_XBOX_BUTTON_B, "GAMEPAD_XBOX_BUTTON_B");
         addConst(m, GAMEPAD_XBOX_BUTTON_X, "GAMEPAD_XBOX_BUTTON_X");
@@ -457,6 +528,7 @@ namespace chaiscript {
         addConst(m, GAMEPAD_XBOX_BUTTON_DOWN, "GAMEPAD_XBOX_BUTTON_DOWN");
         addConst(m, GAMEPAD_XBOX_BUTTON_LEFT, "GAMEPAD_XBOX_BUTTON_LEFT");
 
+        // Xbox360 USB Controller Axis
         addConst(m, GAMEPAD_XBOX_AXIS_LEFT_X, "GAMEPAD_XBOX_AXIS_LEFT_X");
         addConst(m, GAMEPAD_XBOX_AXIS_LEFT_Y, "GAMEPAD_XBOX_AXIS_LEFT_Y");
         addConst(m, GAMEPAD_XBOX_AXIS_RIGHT_X, "GAMEPAD_XBOX_AXIS_RIGHT_X");
@@ -464,6 +536,7 @@ namespace chaiscript {
         addConst(m, GAMEPAD_XBOX_AXIS_LT, "GAMEPAD_XBOX_AXIS_LT");
         addConst(m, GAMEPAD_XBOX_AXIS_RT, "GAMEPAD_XBOX_AXIS_RT");
 
+        // Android Gamepad Controller (SNES CLASSIC)
         addConst(m, GAMEPAD_ANDROID_DPAD_UP, "GAMEPAD_ANDROID_DPAD_UP");
         addConst(m, GAMEPAD_ANDROID_DPAD_DOWN, "GAMEPAD_ANDROID_DPAD_DOWN");
         addConst(m, GAMEPAD_ANDROID_DPAD_LEFT, "GAMEPAD_ANDROID_DPAD_LEFT");
@@ -480,7 +553,52 @@ namespace chaiscript {
         addConst(m, GAMEPAD_ANDROID_BUTTON_L2, "GAMEPAD_ANDROID_BUTTON_L2");
         addConst(m, GAMEPAD_ANDROID_BUTTON_R2, "GAMEPAD_ANDROID_BUTTON_R2");
 
-        // TODO: Add ShaderLocationIndex, TexmapIndex, PixelFormat, TextureFilterMode, TextureWrapMode, FontType, BlendMode, GestureType, CameraMode, CameraType, VrDeviceType, NPatchType.
+        // TODO: Add ShaderLocationIndex, TexmapIndex, PixelFormat, TextureFilterMode.
+
+        // Texture parameters: wrap mode
+        addConst(m, WRAP_REPEAT, "WRAP_REPEAT");
+        addConst(m, WRAP_CLAMP, "WRAP_CLAMP");
+        addConst(m, WRAP_MIRROR_REPEAT, "WRAP_MIRROR_REPEAT");
+        addConst(m, WRAP_MIRROR_CLAMP, "WRAP_MIRROR_CLAMP");
+
+        // Font type, defines generation method
+        addConst(m, FONT_DEFAULT, "FONT_DEFAULT");
+        addConst(m, FONT_BITMAP, "FONT_BITMAP");
+        addConst(m, FONT_SDF, "FONT_SDF");
+
+        // Color blending modes (pre-defined)
+        addConst(m, BLEND_ALPHA, "BLEND_ALPHA");
+        addConst(m, BLEND_ADDITIVE, "BLEND_ADDITIVE");
+        addConst(m, BLEND_MULTIPLIED, "BLEND_MULTIPLIED");
+
+        // Gestures type
+        addConst(m, GESTURE_NONE, "GESTURE_NONE");
+        addConst(m, GESTURE_TAP, "GESTURE_TAP");
+        addConst(m, GESTURE_DOUBLETAP, "GESTURE_DOUBLETAP");
+        addConst(m, GESTURE_HOLD, "GESTURE_HOLD");
+        addConst(m, GESTURE_DRAG, "GESTURE_DRAG");
+        addConst(m, GESTURE_SWIPE_RIGHT, "GESTURE_SWIPE_RIGHT");
+        addConst(m, GESTURE_SWIPE_LEFT, "GESTURE_SWIPE_LEFT");
+        addConst(m, GESTURE_SWIPE_UP, "GESTURE_SWIPE_UP");
+        addConst(m, GESTURE_SWIPE_DOWN, "GESTURE_SWIPE_DOWN");
+        addConst(m, GESTURE_PINCH_IN, "GESTURE_PINCH_IN");
+        addConst(m, GESTURE_PINCH_OUT, "GESTURE_PINCH_OUT");
+
+        // Camera system modes
+        addConst(m, CAMERA_CUSTOM, "CAMERA_CUSTOM");
+        addConst(m, CAMERA_FREE, "CAMERA_FREE");
+        addConst(m, CAMERA_ORBITAL, "CAMERA_ORBITAL");
+        addConst(m, CAMERA_FIRST_PERSON, "CAMERA_FIRST_PERSON");
+        addConst(m, CAMERA_THIRD_PERSON, "CAMERA_THIRD_PERSON");
+
+        // Camera projection modes
+        addConst(m, CAMERA_PERSPECTIVE, "CAMERA_PERSPECTIVE");
+        addConst(m, CAMERA_ORTHOGRAPHIC, "CAMERA_ORTHOGRAPHIC");
+
+        // Type of n-patch
+        addConst(m, NPT_9PATCH, "NPT_9PATCH");
+        addConst(m, NPT_3PATCH_VERTICAL, "NPT_3PATCH_VERTICAL");
+        addConst(m, NPT_3PATCH_HORIZONTAL, "NPT_3PATCH_HORIZONTAL");
 
         return m;
       }
@@ -816,6 +934,7 @@ namespace chaiscript {
         // TODO: m->add(fun(&TextFormat), "TextFormat");
         addTextFormat(m, "TextFormat");
         addTextFormat(m, "FormatText");
+        m->add(fun(&TextSubtext), "SubText");
         m->add(fun(&TextSubtext), "TextSubtext");
         m->add(fun(&TextReplace), "TextReplace");
         m->add(fun(&TextInsert), "TextInsert");

@@ -32,8 +32,7 @@ There are a number of ways to use *raylib-chaiscript*. The following covers its 
 
 ### CLI
 
-There is a command-line interface tool to quickly launch .chai files with raylib, named [raylib-chaiscript](tools/raylib-chaiscript/raylib-chaiscript.cpp). This allows running raylib-chaiscript
-.chai scripts directly from the command line, or just with *drag & drop* of .chai files into *raylib-chaiscript.exe*.
+There is a command-line interface tool to quickly launch .chai files with raylib, named [raylib-chaiscript](tools/raylib-chaiscript/raylib-chaiscript.cpp). This allows running .chai scripts directly from the command line, or just with *drag & drop* of .chai files into *raylib-chaiscript.exe*:
 
 ```
 ./raylib-chaiscript core_basic_window.chai
@@ -45,7 +44,7 @@ It can be compiled for other platforms, just need to include ChaiScript and link
 
 To integrate *raylib-chaiscript* directly into an existing project, the single header-only file, [raylib.hpp](include/chaiscript/extras/raylib.hpp), is used. To add the raylib bindings to your project you will need to...
 
-1. Include that file in your project:
+1. Include the file in your project:
     ``` c++
     #include "chaiscript/extras/raylib.hpp"
     ```
