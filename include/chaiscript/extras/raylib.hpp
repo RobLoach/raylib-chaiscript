@@ -866,7 +866,7 @@ namespace chaiscript {
         m->add(fun(&UnloadModel), "UnloadModel");
 
         // Mesh loading/unloading functions
-        m->add(fun(&LoadMesh), "LoadMesh");
+        m->add(fun(&LoadMeshes), "LoadMeshes");
         m->add(fun(&ExportMesh), "ExportMesh");
         m->add(fun(&UnloadMesh), "UnloadMesh");
 
@@ -969,7 +969,7 @@ namespace chaiscript {
         m->add(fun(&InitVrSimulator), "InitVrSimulator");
         m->add(fun(&CloseVrSimulator), "CloseVrSimulator");
         m->add(fun(&UpdateVrTracking), "UpdateVrTracking");
-        m->add(fun(&SetVrConfiguration), "SetVrConfiguration")
+        m->add(fun(&SetVrConfiguration), "SetVrConfiguration");
         m->add(fun(&IsVrSimulatorReady), "IsVrSimulatorReady");
         m->add(fun(&ToggleVrMode), "ToggleVrMode");
         m->add(fun(&BeginVrDrawing), "BeginVrDrawing");
