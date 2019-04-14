@@ -17,29 +17,32 @@ namespace chaiscript {
        */
       ModulePtr addWindow(ModulePtr m = std::make_shared<Module>()) {
         m->add(fun(&InitWindow), "InitWindow");
-        m->add(fun(&UnhideWindow), "UnhideWindow");
-        m->add(fun(&HideWindow), "HideWindow");
-        m->add(fun(&IsWindowHidden), "IsWindowHidden");
+        m->add(fun(&WindowShouldClose), "WindowShouldClose");
         m->add(fun(&CloseWindow), "CloseWindow");
         m->add(fun(&IsWindowReady), "IsWindowReady");
-        m->add(fun(&WindowShouldClose), "WindowShouldClose");
         m->add(fun(&IsWindowMinimized), "IsWindowMinimized");
+        m->add(fun(&IsWindowResized), "IsWindowResized");
+        m->add(fun(&IsWindowHidden), "IsWindowHidden");
         m->add(fun(&ToggleFullscreen), "ToggleFullscreen");
+        m->add(fun(&UnhideWindow), "UnhideWindow");
+        m->add(fun(&HideWindow), "HideWindow");
         m->add(fun(&SetWindowIcon), "SetWindowIcon");
         m->add(fun(&SetWindowTitle), "SetWindowTitle");
         m->add(fun(&SetWindowPosition), "SetWindowPosition");
         m->add(fun(&SetWindowMonitor), "SetWindowMonitor");
         m->add(fun(&SetWindowMinSize), "SetWindowMinSize");
         m->add(fun(&SetWindowSize), "SetWindowSize");
+        //void *GetWindowHandle(void);
         m->add(fun(&GetScreenWidth), "GetScreenWidth");
         m->add(fun(&GetScreenHeight), "GetScreenHeight");
-        //void *GetWindowHandle(void);
         m->add(fun(&GetMonitorCount), "GetMonitorCount");
         m->add(fun(&GetMonitorWidth), "GetMonitorWidth");
         m->add(fun(&GetMonitorHeight), "GetMonitorHeight");
         m->add(fun(&GetMonitorPhysicalWidth), "GetMonitorPhysicalWidth");
         m->add(fun(&GetMonitorPhysicalHeight), "GetMonitorPhysicalHeight");
         m->add(fun(&GetMonitorName), "GetMonitorName");
+        m->add(fun(&GetClipboardText), "GetClipboardText");
+        m->add(fun(&SetClipboardText), "SetClipboardText");
 
         return m;
       }
@@ -489,6 +492,7 @@ namespace chaiscript {
         m->add(fun(&ColorToInt), "ColorToInt");
         m->add(fun(&ColorNormalize), "ColorNormalize");
         m->add(fun(&ColorToHSV), "ColorToHSV");
+        m->add(fun(&ColorFromHSV), "ColorFromHSV");
         m->add(fun(&GetColor), "GetColor");
         m->add(fun(&Fade), "Fade");
 
@@ -588,6 +592,7 @@ namespace chaiscript {
         m->add(fun(&GetMouseY), "GetMouseY");
         m->add(fun(&GetMousePosition), "GetMousePosition");
         m->add(fun(&SetMousePosition), "SetMousePosition");
+        m->add(fun(&SetMouseOffset), "SetMouseOffset");
         m->add(fun(&SetMouseScale), "SetMouseScale");
         m->add(fun(&GetMouseWheelMove), "GetMouseWheelMove");
 
@@ -647,9 +652,13 @@ namespace chaiscript {
         m->add(fun(&DrawLineEx), "DrawLineEx");
         m->add(fun(&DrawLineBezier), "DrawLineBezier");
         m->add(fun(&DrawCircle), "DrawCircle");
+        m->add(fun(&DrawCircleSector), "DrawCircleSector");
+        m->add(fun(&DrawCircleSectorLines), "DrawCircleSectorLines");
         m->add(fun(&DrawCircleGradient), "DrawCircleGradient");
         m->add(fun(&DrawCircleV), "DrawCircleV");
         m->add(fun(&DrawCircleLines), "DrawCircleLines");
+        m->add(fun(&DrawRing), "DrawRing");
+        m->add(fun(&DrawRingLines), "DrawRingLines");
         m->add(fun(&DrawRectangle), "DrawRectangle");
         m->add(fun(&DrawRectangleV), "DrawRectangleV");
         m->add(fun(&DrawRectangleRec), "DrawRectangleRec");
@@ -659,6 +668,8 @@ namespace chaiscript {
         m->add(fun(&DrawRectangleGradientEx), "DrawRectangleGradientEx");
         m->add(fun(&DrawRectangleLines), "DrawRectangleLines");
         m->add(fun(&DrawRectangleLinesEx), "DrawRectangleLinesEx");
+        m->add(fun(&DrawRectangleRounded), "DrawRectangleRounded");
+        m->add(fun(&DrawRectangleRoundedLines), "DrawRectangleRoundedLines");
         m->add(fun(&DrawTriangle), "DrawTriangle");
         m->add(fun(&DrawTriangleLines), "DrawTriangleLines");
         m->add(fun(&DrawPoly), "DrawPoly");
@@ -688,6 +699,7 @@ namespace chaiscript {
         m->add(fun(&ExportImageAsCode), "ExportImageAsCode");
         m->add(fun(&LoadTexture), "LoadTexture");
         m->add(fun(&LoadTextureFromImage), "LoadTextureFromImage");
+        m->add(fun(&LoadTextureCubemap), "LoadTextureCubemap");
         m->add(fun(&LoadRenderTexture), "LoadRenderTexture");
         m->add(fun(&UnloadImage), "UnloadImage");
         m->add(fun(&UnloadTexture), "UnloadTexture");
@@ -696,7 +708,10 @@ namespace chaiscript {
         m->add(fun(&GetImageDataNormalized), "GetImageDataNormalized");
         m->add(fun(&GetPixelDataSize), "GetPixelDataSize");
         m->add(fun(&GetTextureData), "GetTextureData");
+        m->add(fun(&GetScreenData), "GetScreenData");
         m->add(fun(&UpdateTexture), "UpdateTexture");
+
+        // Image manipulation functions
         m->add(fun(&ImageCopy), "ImageCopy");
         m->add(fun(&ImageToPOT), "ImageToPOT");
         m->add(fun(&ImageFormat), "ImageFormat");
@@ -728,6 +743,8 @@ namespace chaiscript {
         m->add(fun(&ImageColorContrast), "ImageColorContrast");
         m->add(fun(&ImageColorBrightness), "ImageColorBrightness");
         m->add(fun(&ImageColorReplace), "ImageColorReplace");
+
+        // Image generation functions
         m->add(fun(&GenImageColor), "GenImageColor");
         m->add(fun(&GenImageGradientV), "GenImageGradientV");
         m->add(fun(&GenImageGradientH), "GenImageGradientH");
@@ -736,9 +753,13 @@ namespace chaiscript {
         m->add(fun(&GenImageWhiteNoise), "GenImageWhiteNoise");
         m->add(fun(&GenImagePerlinNoise), "GenImagePerlinNoise");
         m->add(fun(&GenImageCellular), "GenImageCellular");
+
+        // Texture2D configuration functions
         m->add(fun(&GenTextureMipmaps), "GenTextureMipmaps");
         m->add(fun(&SetTextureFilter), "SetTextureFilter");
         m->add(fun(&SetTextureWrap), "SetTextureWrap");
+
+        // Texture2D drawing functions
         m->add(fun(&DrawTexture), "DrawTexture");
         m->add(fun(&DrawTextureV), "DrawTextureV");
         m->add(fun(&DrawTextureEx), "DrawTextureEx");
@@ -769,6 +790,7 @@ namespace chaiscript {
        * Font Loading and Text Drawing Functions (Module: text)
        */
       ModulePtr addText(ModulePtr m = std::make_shared<Module>()) {
+        // Font loading/unloading functions
         m->add(fun(&GetFontDefault), "GetFontDefault");
         m->add(fun(&LoadFont), "LoadFont");
         m->add(fun(&LoadFontEx), "LoadFontEx");
@@ -776,13 +798,19 @@ namespace chaiscript {
         m->add(fun(&LoadFontData), "LoadFontData");
         m->add(fun(&GenImageFontAtlas), "GenImageFontAtlas");
         m->add(fun(&UnloadFont), "UnloadFont");
+
+        // Text drawing functions
         m->add(fun(&DrawFPS), "DrawFPS");
         m->add(fun(&DrawText), "DrawText");
         m->add(fun(&DrawTextEx), "DrawTextEx");
         m->add(fun(&DrawTextRec), "DrawTextRec");
+
+        // Text misc. functions
         m->add(fun(&MeasureText), "MeasureText");
         m->add(fun(&MeasureTextEx), "MeasureTextEx");
         m->add(fun(&GetGlyphIndex), "GetGlyphIndex");
+
+        // Text strings management functions
         m->add(fun(&TextIsEqual), "TextIsEqual");
         m->add(fun(&TextLength), "TextLength");
         // TODO: m->add(fun(&TextFormat), "TextFormat");
@@ -793,12 +821,12 @@ namespace chaiscript {
         m->add(fun(&TextInsert), "TextInsert");
         m->add(fun(&TextJoin), "TextJoin");
         m->add(fun(&TextSplit), "TextSplit");
-        m->add(fun(&TextSplitEx), "TextSplitEx");
         m->add(fun(&TextAppend), "TextAppend");
         m->add(fun(&TextFindIndex), "TextFindIndex");
         m->add(fun(&TextToUpper), "TextToUpper");
         m->add(fun(&TextToLower), "TextToLower");
         m->add(fun(&TextToPascal), "TextToPascal");
+        m->add(fun(&TextToInteger), "TextToInteger");
 
         return m;
       }
@@ -807,11 +835,13 @@ namespace chaiscript {
        * Basic 3d Shapes Drawing Functions (Module: models)
        */
       ModulePtr addModels(ModulePtr m = std::make_shared<Module>()) {
+        // Basic geometric 3D shapes drawing functions
         m->add(fun(&DrawLine3D), "DrawLine3D");
         m->add(fun(&DrawCircle3D), "DrawCircle3D");
         m->add(fun(&DrawCube), "DrawCube");
         m->add(fun(&DrawCubeV), "DrawCubeV");
         m->add(fun(&DrawCubeWires), "DrawCubeWires");
+        m->add(fun(&DrawCubeWiresV), "DrawCubeWiresV");
         m->add(fun(&DrawCubeTexture), "DrawCubeTexture");
         m->add(fun(&DrawSphere), "DrawSphere");
         m->add(fun(&DrawSphereEx), "DrawSphereEx");
@@ -830,15 +860,36 @@ namespace chaiscript {
        * Model 3d Loading and Drawing Functions (Module: models)
        */
       ModulePtr addModelsLoading(ModulePtr m = std::make_shared<Module>()) {
+        // Model loading/unloading functions
         m->add(fun(&LoadModel), "LoadModel");
         m->add(fun(&LoadModelFromMesh), "LoadModelFromMesh");
         m->add(fun(&UnloadModel), "UnloadModel");
+
+        // Mesh loading/unloading functions
         m->add(fun(&LoadMesh), "LoadMesh");
-        m->add(fun(&UnloadMesh), "UnloadMesh");
         m->add(fun(&ExportMesh), "ExportMesh");
-        m->add(fun(&MeshBoundingBox), "MeshBoundingBox");
-        m->add(fun(&MeshTangents), "MeshTangents");
-        m->add(fun(&MeshBinormals), "MeshBinormals");
+        m->add(fun(&UnloadMesh), "UnloadMesh");
+
+        // Material loading/unloading functions
+        m->add(fun(&LoadMaterials), "LoadMaterials");
+        m->add(fun(&LoadMaterialDefault), "LoadMaterialDefault");
+        m->add(fun(&UnloadMaterial), "UnloadMaterial");
+        m->add(fun(&SetMaterialTexture), "SetMaterialTexture");
+        m->add(fun(&SetModelMeshMaterial), "SetModelMeshMaterial");
+
+        // Model animations loading/unloading functions
+        m->add(fun(&LoadModelAnimations), "LoadModelAnimations");
+        m->add(fun(&UpdateModelAnimation), "UpdateModelAnimation");
+        m->add(fun(&UnloadModelAnimation), "UnloadModelAnimation");
+        m->add(fun(&IsModelAnimationValid), "IsModelAnimationValid");
+
+        // Mesh generation functions
+        m->add(fun(&SetModelMeshMaterial), "SetModelMeshMaterial");
+        m->add(fun(&SetModelMeshMaterial), "SetModelMeshMaterial");
+        m->add(fun(&SetModelMeshMaterial), "SetModelMeshMaterial");
+        m->add(fun(&SetModelMeshMaterial), "SetModelMeshMaterial");
+
+        // Mesh generation functions
         m->add(fun(&GenMeshPoly), "GenMeshPoly");
         m->add(fun(&GenMeshPlane), "GenMeshPlane");
         m->add(fun(&GenMeshCube), "GenMeshCube");
@@ -849,9 +900,13 @@ namespace chaiscript {
         m->add(fun(&GenMeshKnot), "GenMeshKnot");
         m->add(fun(&GenMeshHeightmap), "GenMeshHeightmap");
         m->add(fun(&GenMeshCubicmap), "GenMeshCubicmap");
-        m->add(fun(&LoadMaterial), "LoadMaterial");
-        m->add(fun(&LoadMaterialDefault), "LoadMaterialDefault");
-        m->add(fun(&UnloadMaterial), "UnloadMaterial");
+
+        // Mesh manipulation functions
+        m->add(fun(&MeshBoundingBox), "MeshBoundingBox");
+        m->add(fun(&MeshTangents), "MeshTangents");
+        m->add(fun(&MeshBinormals), "MeshBinormals");
+
+        // Model drawing functions
         m->add(fun(&DrawModel), "DrawModel");
         m->add(fun(&DrawModelEx), "DrawModelEx");
         m->add(fun(&DrawModelWires), "DrawModelWires");
@@ -859,6 +914,8 @@ namespace chaiscript {
         m->add(fun(&DrawBoundingBox), "DrawBoundingBox");
         m->add(fun(&DrawBillboard), "DrawBillboard");
         m->add(fun(&DrawBillboardRec), "DrawBillboardRec");
+
+        // Collision detection functions
         m->add(fun(&CheckCollisionSpheres), "CheckCollisionSpheres");
         m->add(fun(&CheckCollisionBoxes), "CheckCollisionBoxes");
         m->add(fun(&CheckCollisionBoxSphere), "CheckCollisionBoxSphere");
@@ -876,35 +933,44 @@ namespace chaiscript {
        * Shaders System Functions (Module: rlgl)
        */
       ModulePtr addRlgl(ModulePtr m = std::make_shared<Module>()) {
+        // Shader loading/unloading functions
         m->add(fun(&LoadText), "LoadText");
         m->add(fun(&LoadShader), "LoadShader");
         m->add(fun(&LoadShaderCode), "LoadShaderCode");
         m->add(fun(&UnloadShader), "UnloadShader");
         m->add(fun(&GetShaderDefault), "GetShaderDefault");
         m->add(fun(&GetTextureDefault), "GetTextureDefault");
+
+        // Shader configuration functions
         m->add(fun(&GetShaderLocation), "GetShaderLocation");
         m->add(fun(&SetShaderValue), "SetShaderValue");
         m->add(fun(&SetShaderValueV), "SetShaderValueV");
         m->add(fun(&SetShaderValueMatrix), "SetShaderValueMatrix");
+        m->add(fun(&SetShaderValueTexture), "SetShaderValueTexture");
         m->add(fun(&SetMatrixProjection), "SetMatrixProjection");
         m->add(fun(&SetMatrixModelview), "SetMatrixModelview");
         m->add(fun(&GetMatrixModelview), "GetMatrixModelview");
+
+        // Texture maps generation (PBR)
         m->add(fun(&GenTextureCubemap), "GenTextureCubemap");
         m->add(fun(&GenTextureIrradiance), "GenTextureIrradiance");
         m->add(fun(&GenTexturePrefilter), "GenTexturePrefilter");
         m->add(fun(&GenTextureBRDF), "GenTextureBRDF");
+
+        // Shading begin/end functions
         m->add(fun(&BeginShaderMode), "BeginShaderMode");
         m->add(fun(&EndShaderMode), "EndShaderMode");
         m->add(fun(&BeginBlendMode), "BeginBlendMode");
         m->add(fun(&EndBlendMode), "EndBlendMode");
         m->add(fun(&BeginScissorMode), "BeginScissorMode");
         m->add(fun(&EndScissorMode), "EndScissorMode");
-        m->add(fun(&GetVrDeviceInfo), "GetVrDeviceInfo");
+
+        // VR control functions
         m->add(fun(&InitVrSimulator), "InitVrSimulator");
         m->add(fun(&CloseVrSimulator), "CloseVrSimulator");
-        m->add(fun(&IsVrSimulatorReady), "IsVrSimulatorReady");
-        m->add(fun(&SetVrDistortionShader), "SetVrDistortionShader");
         m->add(fun(&UpdateVrTracking), "UpdateVrTracking");
+        m->add(fun(&SetVrConfiguration), "SetVrConfiguration")
+        m->add(fun(&IsVrSimulatorReady), "IsVrSimulatorReady");
         m->add(fun(&ToggleVrMode), "ToggleVrMode");
         m->add(fun(&BeginVrDrawing), "BeginVrDrawing");
         m->add(fun(&EndVrDrawing), "EndVrDrawing");
@@ -916,10 +982,13 @@ namespace chaiscript {
        * Audio Loading and Playing Functions (Module: audio)
        */
       ModulePtr addAudio(ModulePtr m = std::make_shared<Module>()) {
+        // Audio device management functions
         m->add(fun(&InitAudioDevice), "InitAudioDevice");
         m->add(fun(&CloseAudioDevice), "CloseAudioDevice");
         m->add(fun(&IsAudioDeviceReady), "IsAudioDeviceReady");
         m->add(fun(&SetMasterVolume), "SetMasterVolume");
+
+        // Wave/Sound loading/unloading functions
         m->add(fun(&LoadWave), "LoadWave");
         m->add(fun(&LoadWaveEx), "LoadWaveEx");
         m->add(fun(&LoadSound), "LoadSound");
@@ -929,6 +998,8 @@ namespace chaiscript {
         m->add(fun(&UnloadSound), "UnloadSound");
         m->add(fun(&ExportWave), "ExportWave");
         m->add(fun(&ExportWaveAsCode), "ExportWaveAsCode");
+
+        // Wave/Sound management functions
         m->add(fun(&PlaySound), "PlaySound");
         m->add(fun(&PauseSound), "PauseSound");
         m->add(fun(&ResumeSound), "ResumeSound");
@@ -940,7 +1011,9 @@ namespace chaiscript {
         m->add(fun(&WaveCopy), "WaveCopy");
         m->add(fun(&WaveCrop), "WaveCrop");
         m->add(fun(&GetWaveData), "GetWaveData");
+
         /* TODO: Add Music
+        // Music management functions
         m->add(fun(&LoadMusicStream), "LoadMusicStream");
         m->add(fun(&UnloadMusicStream), "UnloadMusicStream");
         m->add(fun(&PlayMusicStream), "PlayMusicStream");
@@ -955,6 +1028,8 @@ namespace chaiscript {
         m->add(fun(&GetMusicTimeLength), "GetMusicTimeLength");
         m->add(fun(&GetMusicTimePlayed), "GetMusicTimePlayed");
         */
+
+        // AudioStream management functions
         m->add(fun(&InitAudioStream), "InitAudioStream");
         m->add(fun(&UpdateAudioStream), "UpdateAudioStream");
         m->add(fun(&CloseAudioStream), "CloseAudioStream");
