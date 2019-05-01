@@ -511,47 +511,34 @@ namespace chaiscript {
         addConst(m, GAMEPAD_PLAYER3, "GAMEPAD_PLAYER3");
         addConst(m, GAMEPAD_PLAYER4, "GAMEPAD_PLAYER4");
 
-        // TODO: Add PS3 USB Controller Buttons and Axis buttons
+        // GamepadButton
+        addConst(m, GAMEPAD_BUTTON_UNKNOWN, "GAMEPAD_BUTTON_UNKNOWN");
+        addConst(m, GAMEPAD_BUTTON_LEFT_FACE_UP, "GAMEPAD_BUTTON_LEFT_FACE_UP");
+        addConst(m, GAMEPAD_BUTTON_LEFT_FACE_RIGHT, "GAMEPAD_BUTTON_LEFT_FACE_RIGHT");
+        addConst(m, GAMEPAD_BUTTON_LEFT_FACE_DOWN, "GAMEPAD_BUTTON_LEFT_FACE_DOWN");
+        addConst(m, GAMEPAD_BUTTON_LEFT_FACE_LEFT, "GAMEPAD_BUTTON_LEFT_FACE_LEFT");
+        addConst(m, GAMEPAD_BUTTON_RIGHT_FACE_UP, "GAMEPAD_BUTTON_RIGHT_FACE_UP");
+        addConst(m, GAMEPAD_BUTTON_RIGHT_FACE_RIGHT, "GAMEPAD_BUTTON_RIGHT_FACE_RIGHT");
+        addConst(m, GAMEPAD_BUTTON_RIGHT_FACE_DOWN, "GAMEPAD_BUTTON_RIGHT_FACE_DOWN");
+        addConst(m, GAMEPAD_BUTTON_RIGHT_FACE_LEFT, "GAMEPAD_BUTTON_RIGHT_FACE_LEFT");
+        addConst(m, GAMEPAD_BUTTON_LEFT_TRIGGER_1, "GAMEPAD_BUTTON_LEFT_TRIGGER_1");
+        addConst(m, GAMEPAD_BUTTON_LEFT_TRIGGER_2, "GAMEPAD_BUTTON_LEFT_TRIGGER_2");
+        addConst(m, GAMEPAD_BUTTON_RIGHT_TRIGGER_1, "GAMEPAD_BUTTON_RIGHT_TRIGGER_1");
+        addConst(m, GAMEPAD_BUTTON_RIGHT_TRIGGER_2, "GAMEPAD_BUTTON_RIGHT_TRIGGER_2");
+        addConst(m, GAMEPAD_BUTTON_MIDDLE_LEFT, "GAMEPAD_BUTTON_MIDDLE_LEFT");
+        addConst(m, GAMEPAD_BUTTON_MIDDLE, "GAMEPAD_BUTTON_MIDDLE");
+        addConst(m, GAMEPAD_BUTTON_MIDDLE_RIGHT, "GAMEPAD_BUTTON_MIDDLE_RIGHT");
+        addConst(m, GAMEPAD_BUTTON_LEFT_THUMB, "GAMEPAD_BUTTON_LEFT_THUMB");
+        addConst(m, GAMEPAD_BUTTON_RIGHT_THUMB, "GAMEPAD_BUTTON_RIGHT_THUMB");
 
-        // Xbox360 USB Controller Buttons
-        addConst(m, GAMEPAD_XBOX_BUTTON_A, "GAMEPAD_XBOX_BUTTON_A");
-        addConst(m, GAMEPAD_XBOX_BUTTON_B, "GAMEPAD_XBOX_BUTTON_B");
-        addConst(m, GAMEPAD_XBOX_BUTTON_X, "GAMEPAD_XBOX_BUTTON_X");
-        addConst(m, GAMEPAD_XBOX_BUTTON_Y, "GAMEPAD_XBOX_BUTTON_Y");
-        addConst(m, GAMEPAD_XBOX_BUTTON_LB, "GAMEPAD_XBOX_BUTTON_LB");
-        addConst(m, GAMEPAD_XBOX_BUTTON_RB, "GAMEPAD_XBOX_BUTTON_RB");
-        addConst(m, GAMEPAD_XBOX_BUTTON_SELECT, "GAMEPAD_XBOX_BUTTON_SELECT");
-        addConst(m, GAMEPAD_XBOX_BUTTON_START, "GAMEPAD_XBOX_BUTTON_START");
-        addConst(m, GAMEPAD_XBOX_BUTTON_HOME, "GAMEPAD_XBOX_BUTTON_HOME");
-        addConst(m, GAMEPAD_XBOX_BUTTON_UP, "GAMEPAD_XBOX_BUTTON_UP");
-        addConst(m, GAMEPAD_XBOX_BUTTON_RIGHT, "GAMEPAD_XBOX_BUTTON_RIGHT");
-        addConst(m, GAMEPAD_XBOX_BUTTON_DOWN, "GAMEPAD_XBOX_BUTTON_DOWN");
-        addConst(m, GAMEPAD_XBOX_BUTTON_LEFT, "GAMEPAD_XBOX_BUTTON_LEFT");
-
-        // Xbox360 USB Controller Axis
-        addConst(m, GAMEPAD_XBOX_AXIS_LEFT_X, "GAMEPAD_XBOX_AXIS_LEFT_X");
-        addConst(m, GAMEPAD_XBOX_AXIS_LEFT_Y, "GAMEPAD_XBOX_AXIS_LEFT_Y");
-        addConst(m, GAMEPAD_XBOX_AXIS_RIGHT_X, "GAMEPAD_XBOX_AXIS_RIGHT_X");
-        addConst(m, GAMEPAD_XBOX_AXIS_RIGHT_Y, "GAMEPAD_XBOX_AXIS_RIGHT_Y");
-        addConst(m, GAMEPAD_XBOX_AXIS_LT, "GAMEPAD_XBOX_AXIS_LT");
-        addConst(m, GAMEPAD_XBOX_AXIS_RT, "GAMEPAD_XBOX_AXIS_RT");
-
-        // Android Gamepad Controller (SNES CLASSIC)
-        addConst(m, GAMEPAD_ANDROID_DPAD_UP, "GAMEPAD_ANDROID_DPAD_UP");
-        addConst(m, GAMEPAD_ANDROID_DPAD_DOWN, "GAMEPAD_ANDROID_DPAD_DOWN");
-        addConst(m, GAMEPAD_ANDROID_DPAD_LEFT, "GAMEPAD_ANDROID_DPAD_LEFT");
-        addConst(m, GAMEPAD_ANDROID_DPAD_RIGHT, "GAMEPAD_ANDROID_DPAD_RIGHT");
-        addConst(m, GAMEPAD_ANDROID_DPAD_CENTER, "GAMEPAD_ANDROID_DPAD_CENTER");
-        addConst(m, GAMEPAD_ANDROID_BUTTON_A, "GAMEPAD_ANDROID_BUTTON_A");
-        addConst(m, GAMEPAD_ANDROID_BUTTON_B, "GAMEPAD_ANDROID_BUTTON_B");
-        addConst(m, GAMEPAD_ANDROID_BUTTON_C, "GAMEPAD_ANDROID_BUTTON_C");
-        addConst(m, GAMEPAD_ANDROID_BUTTON_X, "GAMEPAD_ANDROID_BUTTON_X");
-        addConst(m, GAMEPAD_ANDROID_BUTTON_Y, "GAMEPAD_ANDROID_BUTTON_Y");
-        addConst(m, GAMEPAD_ANDROID_BUTTON_Z, "GAMEPAD_ANDROID_BUTTON_Z");
-        addConst(m, GAMEPAD_ANDROID_BUTTON_L1, "GAMEPAD_ANDROID_BUTTON_L1");
-        addConst(m, GAMEPAD_ANDROID_BUTTON_R1, "GAMEPAD_ANDROID_BUTTON_R1");
-        addConst(m, GAMEPAD_ANDROID_BUTTON_L2, "GAMEPAD_ANDROID_BUTTON_L2");
-        addConst(m, GAMEPAD_ANDROID_BUTTON_R2, "GAMEPAD_ANDROID_BUTTON_R2");
+        // GamepadAxis
+        addConst(m, GAMEPAD_AXIS_UNKNOWN, "GAMEPAD_AXIS_UNKNOWN");
+        addConst(m, GAMEPAD_AXIS_LEFT_X, "GAMEPAD_AXIS_LEFT_X");
+        addConst(m, GAMEPAD_AXIS_LEFT_Y, "GAMEPAD_AXIS_LEFT_Y");
+        addConst(m, GAMEPAD_AXIS_RIGHT_X, "GAMEPAD_AXIS_RIGHT_X");
+        addConst(m, GAMEPAD_AXIS_RIGHT_Y, "GAMEPAD_AXIS_RIGHT_Y");
+        addConst(m, GAMEPAD_AXIS_LEFT_TRIGGER, "GAMEPAD_AXIS_LEFT_TRIGGER");
+        addConst(m, GAMEPAD_AXIS_RIGHT_TRIGGER, "GAMEPAD_AXIS_RIGHT_TRIGGER");
 
         // TODO: Add ShaderLocationIndex, TexmapIndex, PixelFormat, TextureFilterMode.
 
@@ -791,8 +778,6 @@ namespace chaiscript {
         m->add(fun(&DrawTriangle), "DrawTriangle");
         m->add(fun(&DrawTriangleLines), "DrawTriangleLines");
         m->add(fun(&DrawPoly), "DrawPoly");
-        m->add(fun(&DrawPolyEx), "DrawPolyEx");
-        m->add(fun(&DrawPolyExLines), "DrawPolyExLines");
         m->add(fun(&SetShapesTexture), "SetShapesTexture");
         m->add(fun(&CheckCollisionRecs), "CheckCollisionRecs");
         m->add(fun(&CheckCollisionCircles), "CheckCollisionCircles");
