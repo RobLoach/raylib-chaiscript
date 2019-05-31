@@ -12,13 +12,13 @@
 #include "chaiscript/extras/raylib.hpp"
 
 TEST_CASE( "raylib-chaiscript functions work", "[raylib]" ) {
-
-  auto raylib = chaiscript::extras::raylib::bootstrap();
-
   // Create the ChaiScript environment.
   chaiscript::ChaiScript chai;
 
-  // Add the library to the ChaiScript instance.
+  // Load up the Raylib ChaiScript bindings.
+  auto raylib = chaiscript::extras::raylib::bootstrap();
+
+  // Add the raylib bindings to the ChaiScript instance.
   chai.add(raylib);
 
   // Functions
