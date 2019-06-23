@@ -540,7 +540,36 @@ namespace chaiscript {
         addConst(m, GAMEPAD_AXIS_LEFT_TRIGGER, "GAMEPAD_AXIS_LEFT_TRIGGER");
         addConst(m, GAMEPAD_AXIS_RIGHT_TRIGGER, "GAMEPAD_AXIS_RIGHT_TRIGGER");
 
-        // TODO: Add ShaderLocationIndex, TexmapIndex, PixelFormat, TextureFilterMode.
+        // TODO: Add ShaderUniformDataType, MaterialMapType, TexmapIndex, PixelFormat, TextureFilterMode.
+
+        // ShaderLocationIndex
+        addConst(m, LOC_VERTEX_POSITION, "LOC_VERTEX_POSITION");
+        addConst(m, LOC_VERTEX_TEXCOORD01, "LOC_VERTEX_TEXCOORD01");
+        addConst(m, LOC_VERTEX_TEXCOORD02, "LOC_VERTEX_TEXCOORD02");
+        addConst(m, LOC_VERTEX_NORMAL, "LOC_VERTEX_NORMAL");
+        addConst(m, LOC_VERTEX_TANGENT, "LOC_VERTEX_TANGENT");
+        addConst(m, LOC_VERTEX_COLOR, "LOC_VERTEX_COLOR");
+        addConst(m, LOC_MATRIX_MVP, "LOC_MATRIX_MVP");
+        addConst(m, LOC_MATRIX_MODEL, "LOC_MATRIX_MODEL");
+        addConst(m, LOC_MATRIX_VIEW, "LOC_MATRIX_VIEW");
+        addConst(m, LOC_MATRIX_PROJECTION, "LOC_MATRIX_PROJECTION");
+        addConst(m, LOC_VECTOR_VIEW, "LOC_VECTOR_VIEW");
+        addConst(m, LOC_COLOR_DIFFUSE, "LOC_COLOR_DIFFUSE");
+        addConst(m, LOC_COLOR_SPECULAR, "LOC_COLOR_SPECULAR");
+        addConst(m, LOC_COLOR_AMBIENT, "LOC_COLOR_AMBIENT");
+        addConst(m, LOC_MAP_ALBEDO, "LOC_MAP_ALBEDO");
+        addConst(m, LOC_MAP_METALNESS, "LOC_MAP_METALNESS");
+        addConst(m, LOC_MAP_NORMAL, "LOC_MAP_NORMAL");
+        addConst(m, LOC_MAP_ROUGHNESS, "LOC_MAP_ROUGHNESS");
+        addConst(m, LOC_MAP_OCCLUSION, "LOC_MAP_OCCLUSION");
+        addConst(m, LOC_MAP_EMISSION, "LOC_MAP_EMISSION");
+        addConst(m, LOC_MAP_HEIGHT, "LOC_MAP_HEIGHT");
+        addConst(m, LOC_MAP_CUBEMAP, "LOC_MAP_CUBEMAP");
+        addConst(m, LOC_MAP_IRRADIANCE, "LOC_MAP_IRRADIANCE");
+        addConst(m, LOC_MAP_PREFILTER, "LOC_MAP_PREFILTER");
+        addConst(m, LOC_MAP_BRDF, "LOC_MAP_BRDF");
+        addConst(m, LOC_MAP_DIFFUSE, "LOC_MAP_DIFFUSE");
+        addConst(m, LOC_MAP_SPECULAR, "LOC_MAP_SPECULAR");
 
         // Texture parameters: wrap mode
         addConst(m, WRAP_REPEAT, "WRAP_REPEAT");
@@ -756,6 +785,7 @@ namespace chaiscript {
         m->add(fun(&DrawLineV), "DrawLineV");
         m->add(fun(&DrawLineEx), "DrawLineEx");
         m->add(fun(&DrawLineBezier), "DrawLineBezier");
+        m->add(fun(&DrawLineStrip), "DrawLineStrip");
         m->add(fun(&DrawCircle), "DrawCircle");
         m->add(fun(&DrawCircleSector), "DrawCircleSector");
         m->add(fun(&DrawCircleSectorLines), "DrawCircleSectorLines");
@@ -777,6 +807,7 @@ namespace chaiscript {
         m->add(fun(&DrawRectangleRoundedLines), "DrawRectangleRoundedLines");
         m->add(fun(&DrawTriangle), "DrawTriangle");
         m->add(fun(&DrawTriangleLines), "DrawTriangleLines");
+        m->add(fun(&DrawTriangleFan), "DrawTriangleFan");
         m->add(fun(&DrawPoly), "DrawPoly");
         m->add(fun(&SetShapesTexture), "SetShapesTexture");
         m->add(fun(&CheckCollisionRecs), "CheckCollisionRecs");
