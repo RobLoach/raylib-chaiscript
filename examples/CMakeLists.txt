@@ -1,4 +1,28 @@
-configure_file(core/core_basic_window.chai core/core_basic_window.chai COPYONLY)
-configure_file(core/core_input_keys.chai core/core_input_keys.chai COPYONLY)
-configure_file(core/core_random_values.chai core/core_random_values.chai COPYONLY)
-configure_file(text/text_input_box.chai text/text_input_box.chai COPYONLY)
+# Get the sources together
+set(example_dirs audio core text textures)
+set(example_sources)
+set(example_resources)
+
+# Examples directories
+foreach(example_dir ${example_dirs})
+    file(GLOB sources ${example_dir}/*.chai)
+    list(APPEND example_sources ${sources})
+
+    # Any all resources.
+    file(GLOB resources ${example_dir}/resources/*)
+    list(APPEND example_resources ${resources})
+endforeach()
+
+# Add all examples.
+foreach(example_source ${example_sources})
+    # Create the basename for the example
+    get_filename_component(example_name ${example_source} NAME)
+
+    configure_file(${example_source} ${example_name} COPYONLY)
+
+    string(REGEX MATCH ".*/.*/" resources_dir ${example_source})
+    string(APPEND resources_dir "resources")
+endforeach()
+
+# Resources
+file(COPY ${example_resources} DESTINATION "resources/")
