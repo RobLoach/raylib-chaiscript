@@ -50,11 +50,9 @@ while (!WindowShouldClose())    // Detect window close button or ESC key
     if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
     {
         // Create more bunnies
-        for (var i = 0; i < 100; ++i) {
-            if (bunnies.size() < MAX_BUNNIES)
-            {
-                bunnies.push_back(Bunny())
-            }
+        if (bunnies.size() < MAX_BUNNIES)
+        {
+            bunnies.push_back(Bunny())
         }
     }
 
